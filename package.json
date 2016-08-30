@@ -1,0 +1,55 @@
+{
+  "name": "unitimer",
+  "version": "1.0.0",
+  "description": "Universal timer (Node.js and browser)",
+  "main": "./lib/index.js",
+  "browser": {
+    "./lib/index.js": "./lib/browser.js"
+  },
+  "scripts": {
+    "build": "browserify lib/index.js -s unitimer -o dist/unitimer.js",
+    "build:min": "browserify lib/index.js -s unitimer | uglifyjs -c > dist/unitimer.min.js",
+    "watch": "watchify lib/index.js -s unitimer -o dist/unitimer.js",
+    "lint": "standard",
+    "unit": "ava -v",
+    "test": "standard && ava -v"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ],
+    "source": [
+      "lib/**/*.js"
+    ]
+  },
+  "standard": {
+    "ignore": "dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebSeed/unitimer.git"
+  },
+  "keywords": [
+    "timer",
+    "profile",
+    "performance",
+    "measure",
+    "speed",
+    "console.time",
+    "hrtime",
+    "Date.now"
+  ],
+  "author": "Will Bamford",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WebSeed/unitimer/issues"
+  },
+  "homepage": "https://github.com/WebSeed/unitimer#readme",
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "browserify": "^13.1.0",
+    "proxyquire": "^1.7.10",
+    "standard": "^8.0.0",
+    "watchify": "^3.7.0"
+  }
+}
