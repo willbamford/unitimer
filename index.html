@@ -1,4 +1,12 @@
 <script src="./dist/unitimer.js"></script>
 <script>
-  var t = unitimer()
+  unitimer.start()
+
+
+  setTimeout(function() {
+      var millis = unitimer.stop()
+      console.log('A', millis)
+  }, 3000)
+
+
 </script>

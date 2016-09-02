@@ -4,7 +4,7 @@
   "description": "Universal timer (Node.js and browser)",
   "main": "./lib/index.js",
   "browser": {
-    "./lib/index.js": "./lib/browser.js"
+    "./lib/now.js": "./lib/browser-now.js"
   },
   "scripts": {
     "build": "browserify lib/index.js -s unitimer -o dist/unitimer.js",
@@ -49,6 +49,7 @@
     "ava": "^0.16.0",
     "browserify": "^13.1.0",
     "proxyquire": "^1.7.10",
+    "sinon": "^1.17.5",
     "standard": "^8.0.0",
     "watchify": "^3.7.0"
   }
