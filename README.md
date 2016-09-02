@@ -16,7 +16,7 @@
     alt="File size" />
 </a>
 
-Universal timer (Node.js and browser)
+Universal timer (Node.js and browser). Super simple i.e.
 
 ```js
 var timer = require('unitimer')
