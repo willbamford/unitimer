@@ -11,7 +11,7 @@ module.exports = now
 },{}],2:[function(require,module,exports){
 var now = require('./now')
 
-function unitimer () {
+function createInstance (tag) {
   var totalTime = 0
   var meanTime = 0
   var minTime = -1
@@ -62,11 +62,12 @@ function unitimer () {
       }
     },
     info: function () {
-      return 'mean: ' + meanTime +
-        'ms, total: ' + totalTime +
-        'ms, count: ' + count +
-        ', min: ' + minTime +
-        'ms, max: ' + maxTime +
+      return (tag ? tag + ': ' : '') +
+        'mean=' + meanTime +
+        'ms, total=' + totalTime +
+        'ms, count=' + count +
+        ', min=' + minTime +
+        'ms, max=' + maxTime +
         'ms'
     },
     log: function () {
@@ -75,7 +76,22 @@ function unitimer () {
   }
 }
 
-module.exports = unitimer
+function createTimer () {
+  var tags = Array.prototype.slice.call(arguments)
+
+  // Named instances
+  if (tags.length > 0) {
+    var r = {}
+    tags.forEach(function (tag) {
+      r[tag] = createInstance(tag)
+    })
+    return r
+  }
+
+  return createInstance()
+}
+
+module.exports = createTimer
 
 },{"./now":1}]},{},[2])(2)
 });

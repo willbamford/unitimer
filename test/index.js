@@ -188,10 +188,58 @@ test('info() returns a summary string', (t) => {
   timer.stop()
   timer.start()
   timer.stop()
-  t.deepEqual(
+  t.is(
     timer.info(),
-    'mean: 7500ms, total: 15000ms, count: 2, min: 5000ms, max: 10000ms'
+    'mean=7500ms, total=15000ms, count=2, min=5000ms, max=10000ms'
   )
   t.is(typeof timer.log, 'function')
+  hrtime.restore()
+})
+
+test('create single with tags', (t) => {
+  const times = [
+    [5, 0],
+    [10, 0],
+    [20, 0],
+    [30, 0]
+  ]
+  const hrtime = stubHrtime(times)
+  const { foo, bar } = createTimer('foo', 'bar')
+  foo.start()
+  foo.stop()
+  bar.start()
+  bar.stop()
+  t.is(
+    foo.info(),
+    'foo: mean=5000ms, total=5000ms, count=1, min=5000ms, max=5000ms'
+  )
+  t.is(
+    bar.info(),
+    'bar: mean=10000ms, total=10000ms, count=1, min=10000ms, max=10000ms'
+  )
+  hrtime.restore()
+})
+
+test('create multiple with tags', (t) => {
+  const times = [
+    [5, 0],
+    [10, 0],
+    [20, 0],
+    [30, 0]
+  ]
+  const hrtime = stubHrtime(times)
+  const { foo, bar } = createTimer('foo', 'bar')
+  foo.start()
+  foo.stop()
+  bar.start()
+  bar.stop()
+  t.is(
+    foo.info(),
+    'foo: mean=5000ms, total=5000ms, count=1, min=5000ms, max=5000ms'
+  )
+  t.is(
+    bar.info(),
+    'bar: mean=10000ms, total=10000ms, count=1, min=10000ms, max=10000ms'
+  )
   hrtime.restore()
 })
