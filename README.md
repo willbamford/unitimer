@@ -19,25 +19,49 @@
 Universal timer (Node.js and browser). Super simple i.e.
 
 ```js
-var timer = require('unitimer')
-timer.start('tag')
+var createTimer = require('unitimer')
+var timer = createTimer().start()
 setTimeout(function () {
-  var ms = timer.stop('tag') // ms ~= 1000.0
+  var ms = timer.stop() // ms ~= 1000.0
 }, 1000)
 ```
 
 ## API
 
-`timer.start(tag)` called at the start of the section you want to measure the performance of.
+### `timer.start()`
 
-`timer.stop(tag)` called at the end, returns interval time in milliseconds of that section.
+Begin measuring interval.
 
-`timer.mean(tag)` returns arithmetic average in milliseconds.
+### `timer.stop()`
 
-`total(tag)` returns the total time taken for a given tag (addition of `start` / `stop` durations)
+End the interval. Returns the elapsed time in milliseconds.
 
-`timer.count(tag)` returns the number of intervals measured.
+Note: `start()` and `stop()` can be called multiple times (which affects the total time, count, mean etc.).
 
-`timer.min(tag)` returns the minimum interval time recorded.
+### `timer.mean()`
 
-`timer.max(tag)` returns the maximum interval time recorded.
+Returns arithmetic average in milliseconds.
+
+### `timer.total()`
+
+Returns the total time taken for a given  (addition of `start` / `stop` durations)
+
+### `timer.count()`
+
+Returns the number of intervals measured.
+
+### `timer.min()`
+
+Returns the minimum interval time recorded.
+
+### `timer.max()`
+
+Returns the maximum interval time recorded.
+
+### `timer.info()`
+
+Returns a string summary of timer total, mean, total, min and max.
+
+### `timer.log()`
+
+`console.log` of `timer.info()` (see above)

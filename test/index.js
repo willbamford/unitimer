@@ -1,6 +1,6 @@
 const test = require('ava')
 const sinon = require('sinon')
-const timer = require('../lib')
+const createTimer = require('../lib')
 
 function stubHrtime (times) {
   let index = 0
@@ -10,12 +10,7 @@ function stubHrtime (times) {
   return sinon.stub(process, 'hrtime', fn)
 }
 
-test('start label does not exist', (t) => {
-  const millis = timer.stop('does-not-exist')
-  t.is(millis, -1)
-})
-
-test('start stop intervals', (t) => {
+test('start() then stop() returns the interval', (t) => {
   const times = [
     [4, 10],
     [10, 50],
@@ -23,11 +18,36 @@ test('start stop intervals', (t) => {
     [10, 0]
   ]
   const hrtime = stubHrtime(times)
-  timer.start('A')
-  const msA = timer.stop('A')
+  const a = createTimer().start()
+  const msA = a.stop()
   t.is(msA, 6000.000040000001) // 6000.00004
-  timer.start('B')
-  const msB = timer.stop('B')
+  const b = createTimer().start()
+  const msB = b.stop()
+  t.is(msB, 0.0000010000003385357559) // 0.000001
+  hrtime.restore()
+})
+
+test('stop() with no start() returns -1', (t) => {
+  const timer = createTimer()
+  const millis = timer.stop()
+  t.is(millis, -1)
+})
+
+test('use last start() before stop()', (t) => {
+  const times = [
+    [4, 10],
+    [5, 10],
+    [10, 50],
+    [9, 999999999],
+    [10, 0]
+  ]
+  const hrtime = stubHrtime(times)
+  const a = createTimer().start()
+  a.start()
+  const msA = a.stop()
+  t.is(msA, 5000.000040000001) // 6000.00004
+  const b = createTimer().start()
+  const msB = b.stop()
   t.is(msB, 0.0000010000003385357559) // 0.000001
   hrtime.restore()
 })
@@ -42,19 +62,19 @@ test('overlapping intervals', (t) => {
     [30, 11]      // B1
   ]
   const hrtime = stubHrtime(times)
-  timer.start('A')
-  timer.start('B')
-  const msA = timer.stop('A')
-  timer.start('C')
-  const msC = timer.stop('C')
-  const msB = timer.stop('B')
+  var a = createTimer().start()
+  var b = createTimer().start()
+  const msA = a.stop()
+  var c = createTimer().start()
+  const msC = c.stop()
+  const msB = b.stop()
   t.is(msA, 6000.000040000001) // 6000.00004
   t.is(msB, 26000)
   t.is(msC, 1000.0000999999975) // 1000.000100
   hrtime.restore()
 })
 
-test('total time', (t) => {
+test('total() is total time', (t) => {
   const times = [
     [5, 0],
     [10, 0],
@@ -63,16 +83,17 @@ test('total time', (t) => {
     [50, 0] // Not used
   ]
   const hrtime = stubHrtime(times)
-  timer.start('TT')
-  timer.stop('TT')
-  timer.start('TT')
-  timer.stop('TT')
-  timer.stop('TT') // Ignored
-  t.is(timer.total('TT'), 15000.0)
+  const timer = createTimer()
+  timer.start()
+  timer.stop()
+  timer.start()
+  timer.stop()
+  timer.stop() // Ignored
+  t.is(timer.total(), 15000.0)
   hrtime.restore()
 })
 
-test('mean time', (t) => {
+test('mean() is arithmetic average', (t) => {
   const times = [
     [5, 0],
     [10, 0],
@@ -80,16 +101,16 @@ test('mean time', (t) => {
     [30, 0]
   ]
   const hrtime = stubHrtime(times)
-  timer.start('MT')
-  timer.stop('MT')
-  timer.start('MT')
-  timer.stop('MT')
-  t.is(timer.count('MT'), 2)
-  t.is(timer.mean('MT'), 7500.0)
+  const timer = createTimer().start()
+  timer.stop()
+  timer.start()
+  timer.stop()
+  t.is(timer.count(), 2)
+  t.is(timer.mean(), 7500.0)
   hrtime.restore()
 })
 
-test('count', (t) => {
+test('count() is number of intervals', (t) => {
   const times = [
     [5, 0],
     [10, 0],
@@ -97,15 +118,15 @@ test('count', (t) => {
     [30, 0]
   ]
   const hrtime = stubHrtime(times)
-  timer.start('CT')
-  timer.stop('CT')
-  timer.start('CT')
-  timer.stop('CT')
-  t.is(timer.count('CT'), 2)
+  const timer = createTimer().start()
+  timer.stop()
+  timer.start()
+  timer.stop()
+  t.is(timer.count(), 2)
   hrtime.restore()
 })
 
-test('max & min time', (t) => {
+test('max() & min() time', (t) => {
   const times = [
     [5, 0],
     [10, 0],
@@ -117,15 +138,60 @@ test('max & min time', (t) => {
     [102, 0]
   ]
   const hrtime = stubHrtime(times)
-  timer.start('MM')
-  timer.stop('MM')
-  timer.start('MM')
-  timer.stop('MM')
-  timer.start('MM')
-  timer.stop('MM')
-  timer.start('MM')
-  timer.stop('MM')
-  t.is(timer.max('MM'), 10000)
-  t.is(timer.min('MM'), 1000)
+  const timer = createTimer().start()
+  timer.stop()
+  timer.start()
+  timer.stop()
+  timer.start()
+  timer.stop()
+  timer.start()
+  timer.stop()
+  t.is(timer.max(), 10000)
+  t.is(timer.min(), 1000)
+  hrtime.restore()
+})
+
+test('stats() returns a stats object', (t) => {
+  const times = [
+    [5, 0],
+    [10, 0],
+    [20, 0],
+    [30, 0]
+  ]
+  const hrtime = stubHrtime(times)
+  const timer = createTimer().start()
+  timer.stop()
+  timer.start()
+  timer.stop()
+  t.deepEqual(
+    timer.stats(),
+    {
+      total: 15000,
+      mean: 7500,
+      count: 2,
+      min: 5000,
+      max: 10000
+    }
+  )
+  hrtime.restore()
+})
+
+test('info() returns a summary string', (t) => {
+  const times = [
+    [5, 0],
+    [10, 0],
+    [20, 0],
+    [30, 0]
+  ]
+  const hrtime = stubHrtime(times)
+  const timer = createTimer().start()
+  timer.stop()
+  timer.start()
+  timer.stop()
+  t.deepEqual(
+    timer.info(),
+    'mean: 7500ms, total: 15000ms, count: 2, min: 5000ms, max: 10000ms'
+  )
+  t.is(typeof timer.log, 'function')
   hrtime.restore()
 })
