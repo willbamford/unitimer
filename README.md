@@ -20,8 +20,24 @@ Universal timer (Node.js and browser). Super simple i.e.
 
 ```js
 var timer = require('unitimer')
-timer.start('label')
+timer.start('tag')
 setTimeout(function () {
-  var ms = timer.stop('label') // ms ~= 1000.0
+  var ms = timer.stop('tag') // ms ~= 1000.0
 }, 1000)
 ```
+
+## API
+
+`start(tag)` called at the start of the section you want to measure the performance of.
+
+`stop(tag)` called at the end, returns interval time in milliseconds of that section.
+
+`mean(tag)` returns arithmetic average in milliseconds.
+
+`total(tag)` returns the total time taken for a given tag (addition of `start` / `stop` durations)
+
+`count(tag)` returns the number of intervals measured.
+
+`min(tag)` returns the minimum interval time recorded.
+
+`max(tag)` returns the maximum interval time recorded.
