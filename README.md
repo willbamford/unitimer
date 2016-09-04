@@ -28,16 +28,16 @@ setTimeout(function () {
 
 ## API
 
-`start(tag)` called at the start of the section you want to measure the performance of.
+`timer.start(tag)` called at the start of the section you want to measure the performance of.
 
-`stop(tag)` called at the end, returns interval time in milliseconds of that section.
+`timer.stop(tag)` called at the end, returns interval time in milliseconds of that section.
 
-`mean(tag)` returns arithmetic average in milliseconds.
+`timer.mean(tag)` returns arithmetic average in milliseconds.
 
 `total(tag)` returns the total time taken for a given tag (addition of `start` / `stop` durations)
 
-`count(tag)` returns the number of intervals measured.
+`timer.count(tag)` returns the number of intervals measured.
 
-`min(tag)` returns the minimum interval time recorded.
+`timer.min(tag)` returns the minimum interval time recorded.
 
-`max(tag)` returns the maximum interval time recorded.
+`timer.max(tag)` returns the maximum interval time recorded.
