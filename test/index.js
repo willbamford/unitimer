@@ -178,10 +178,10 @@ test('stats() returns a stats object', (t) => {
 
 test('info() returns a summary string', (t) => {
   const times = [
-    [5, 0],
-    [10, 0],
-    [20, 0],
-    [30, 0]
+    [5, 99],
+    [10, 10000],
+    [20, 3],
+    [30, 50000]
   ]
   const hrtime = stubHrtime(times)
   const timer = createTimer().start()
@@ -190,7 +190,11 @@ test('info() returns a summary string', (t) => {
   timer.stop()
   t.is(
     timer.info(),
-    'mean: 7500ms, total: 15000ms, count: 2, min: 5000ms, max: 10000ms'
+    'mean: 7500.029949ms, total: 15000.059898ms, count: 2, min: 5000.009901ms, max: 10000.049996999998ms'
+  )
+  t.is(
+    timer.info(3),
+    'mean: 7500.030ms, total: 15000.060ms, count: 2, min: 5000.010ms, max: 10000.050ms'
   )
   t.is(typeof timer.log, 'function')
   hrtime.restore()
