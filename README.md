@@ -58,10 +58,10 @@ Returns the minimum interval time recorded.
 
 Returns the maximum interval time recorded.
 
-### `timer.info()`
+### `timer.info(precision)`
 
-Returns a string summary of timer total, mean, total, min and max.
+Returns a string summary of timer total, mean, total, min and max. `precision` is number of decimal places to show (_optional_).
 
-### `timer.log()`
+### `timer.log(precision)`
 
 `console.log` of `timer.info()` (see above)
