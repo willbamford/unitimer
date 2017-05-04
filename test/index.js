@@ -7,7 +7,7 @@ function stubHrtime (times) {
   function fn () {
     return times[index++]
   }
-  return sinon.stub(process, 'hrtime', fn)
+  return sinon.stub(process, 'hrtime').callsFake(fn)
 }
 
 test('start() then stop() returns the interval', (t) => {
