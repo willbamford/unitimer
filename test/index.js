@@ -27,6 +27,24 @@ test('start() then stop() returns the interval', (t) => {
   hrtime.restore()
 })
 
+test('handles async start() then stop() using optional identifier', (t) => {
+  const times = [
+    [4, 0],
+    [4, 0],
+    [9, 0],
+    [10, 0]
+  ]
+  const hrtime = stubHrtime(times)
+  const timer = createTimer()
+  timer.start('a')
+  timer.start('b')
+  const msA = timer.stop('a')
+  const msB = timer.stop('b')
+  t.is(msA, 5000)
+  t.is(msB, 6000)
+  hrtime.restore()
+})
+
 test('stop() with no start() returns -1', (t) => {
   const timer = createTimer()
   const millis = timer.stop()
