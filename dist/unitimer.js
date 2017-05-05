@@ -24,33 +24,24 @@ function createInstance (tag) {
   var minTime = -1
   var maxTime = -1
   var count = 0
-  var startTime = null
   var startTimes = {}
 
   return {
-    start: function (id) {
+    start: function (id = 'default') {
       var time = now()
-      if (id) {
-        startTimes[id] = time
-      } else {
-        startTime = time
-      }
+      startTimes[id] = time
       return this
     },
-    stop: function (id) {
-      const t = id ? startTimes[id] : startTime
-      if (!t) { return -1 }
-      var took = now() - t
+    stop: function (id = 'default') {
+      const startTime = startTimes[id]
+      if (!startTime) { return -1 }
+      var took = now() - startTime
       minTime = minTime === -1 ? took : Math.min(minTime, took)
       maxTime = maxTime === -1 ? took : Math.max(maxTime, took)
       totalTime += took
       count += 1
       meanTime = totalTime / count
-      if (id) {
-        startTimes[id] = undefined
-      } else {
-        startTime = null
-      }
+      startTimes[id] = undefined
       return took
     },
     total: function () {
