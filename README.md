@@ -38,13 +38,17 @@ End the interval. Returns the elapsed time in milliseconds.
 
 Note: `start()` and `stop()` can be called multiple times (which affects the total time, count, mean etc.).
 
+### `timer.took()`
+
+Returns the most recent start / stop interval in milliseconds.
+
 ### `timer.mean()`
 
 Returns arithmetic average in milliseconds.
 
 ### `timer.total()`
 
-Returns the total time taken for a given  (addition of `start` / `stop` durations)
+Returns the total time taken (an addition of `start` / `stop` intervals)
 
 ### `timer.count()`
 
@@ -65,3 +69,7 @@ Returns a string summary of timer total, mean, total, min and max. `precision` i
 ### `timer.log(precision)`
 
 `console.log` of `timer.info()` (see above)
+
+### `timer.stats()`
+
+Returns a stats object.
