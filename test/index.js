@@ -92,6 +92,29 @@ test('overlapping intervals', (t) => {
   hrtime.restore()
 })
 
+test('reset()', (t) => {
+  const times = [
+    [1, 0],
+    [2, 0]
+  ]
+  const hrtime = stubHrtime(times)
+  const a = createTimer().start()
+  a.stop()
+  a.reset()
+  t.deepEqual(
+    a.stats(),
+    {
+      took: 0,
+      total: 0,
+      mean: 0,
+      count: 0,
+      min: -1,
+      max: -1
+    }
+  )
+  hrtime.restore()
+})
+
 test('total() is total time', (t) => {
   const times = [
     [5, 0],

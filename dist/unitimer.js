@@ -19,13 +19,25 @@ function toFixed (v, dp) {
 }
 
 function createInstance (tag) {
-  var totalTime = 0
-  var meanTime = 0
-  var minTime = -1
-  var maxTime = -1
-  var count = 0
-  var tookTime = -1
-  var startTimes = {}
+  var totalTime
+  var meanTime
+  var minTime
+  var maxTime
+  var count
+  var tookTime
+  var startTimes
+
+  function reset () {
+    totalTime = 0
+    meanTime = 0
+    minTime = -1
+    maxTime = -1
+    count = 0
+    tookTime = 0
+    startTimes = {}
+  }
+
+  reset()
 
   return {
     start: function (id = 'default') {
@@ -45,6 +57,7 @@ function createInstance (tag) {
       startTimes[id] = undefined
       return tookTime
     },
+    reset,
     took: function () {
       return tookTime
     },
