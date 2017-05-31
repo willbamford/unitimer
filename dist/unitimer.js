@@ -78,9 +78,9 @@ function createInstance (tag) {
     },
     stats: function () {
       return {
+        mean: meanTime,
         took: tookTime,
         total: totalTime,
-        mean: meanTime,
         count: count,
         min: minTime,
         max: maxTime
@@ -88,8 +88,8 @@ function createInstance (tag) {
     },
     info: function (dp) {
       return (tag ? '[' + tag + '] ' : '') +
-        'took: ' + toFixed(tookTime, dp) +
-        'ms, mean: ' + toFixed(meanTime, dp) +
+        'mean: ' + toFixed(meanTime, dp) +
+        'ms, took: ' + toFixed(tookTime, dp) +
         'ms, total: ' + toFixed(totalTime, dp) +
         'ms, count: ' + count +
         ', min: ' + toFixed(minTime, dp) +

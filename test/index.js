@@ -232,11 +232,11 @@ test('info() returns a summary string', (t) => {
   timer.stop()
   t.is(
     timer.info(),
-    'took: 10000.049996999998ms, mean: 7500.029949ms, total: 15000.059898ms, count: 2, min: 5000.009901ms, max: 10000.049996999998ms'
+    'mean: 7500.029949ms, took: 10000.049996999998ms, total: 15000.059898ms, count: 2, min: 5000.009901ms, max: 10000.049996999998ms'
   )
   t.is(
     timer.info(3),
-    'took: 10000.050ms, mean: 7500.030ms, total: 15000.060ms, count: 2, min: 5000.010ms, max: 10000.050ms'
+    'mean: 7500.030ms, took: 10000.050ms, total: 15000.060ms, count: 2, min: 5000.010ms, max: 10000.050ms'
   )
   t.is(typeof timer.log, 'function')
   hrtime.restore()
@@ -255,7 +255,7 @@ test('create single with tag', (t) => {
   foo.stop()
   t.is(
     foo.info(),
-    '[foo] took: 5000ms, mean: 5000ms, total: 5000ms, count: 1, min: 5000ms, max: 5000ms'
+    '[foo] mean: 5000ms, took: 5000ms, total: 5000ms, count: 1, min: 5000ms, max: 5000ms'
   )
   hrtime.restore()
 })
@@ -275,11 +275,11 @@ test('create multiple with tags', (t) => {
   bar.stop()
   t.is(
     foo.info(),
-    '[foo] took: 5000ms, mean: 5000ms, total: 5000ms, count: 1, min: 5000ms, max: 5000ms'
+    '[foo] mean: 5000ms, took: 5000ms, total: 5000ms, count: 1, min: 5000ms, max: 5000ms'
   )
   t.is(
     bar.info(),
-    '[bar] took: 10000ms, mean: 10000ms, total: 10000ms, count: 1, min: 10000ms, max: 10000ms'
+    '[bar] mean: 10000ms, took: 10000ms, total: 10000ms, count: 1, min: 10000ms, max: 10000ms'
   )
   hrtime.restore()
 })
