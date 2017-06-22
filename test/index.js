@@ -2,9 +2,9 @@ const test = require('ava')
 const sinon = require('sinon')
 const createTimer = require('../lib')
 
-function stubHrtime (times) {
+function stubHrtime(times) {
   let index = 0
-  function fn () {
+  function fn() {
     return times[index++]
   }
   return sinon.stub(process, 'hrtime').callsFake(fn)
@@ -80,10 +80,10 @@ test('overlapping intervals', (t) => {
     [30, 11]      // B1
   ]
   const hrtime = stubHrtime(times)
-  var a = createTimer().start()
-  var b = createTimer().start()
+  const a = createTimer().start()
+  const b = createTimer().start()
   const msA = a.stop()
-  var c = createTimer().start()
+  const c = createTimer().start()
   const msC = c.stop()
   const msB = b.stop()
   t.is(msA, 6000.000040000001) // 6000.00004
@@ -268,7 +268,7 @@ test('create multiple with tags', (t) => {
     [30, 0]
   ]
   const hrtime = stubHrtime(times)
-  const [ foo, bar ] = createTimer(['foo', 'bar'])
+  const [foo, bar] = createTimer(['foo', 'bar'])
   foo.start()
   foo.stop()
   bar.start()

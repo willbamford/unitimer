@@ -1,18 +1,18 @@
 {
   "name": "unitimer",
-  "version": "3.5.1",
+  "version": "3.6.1",
   "description": "Universal timer (Node.js and browser)",
   "main": "./lib/index.js",
   "browser": {
     "./lib/now.js": "./lib/browser-now.js"
   },
   "scripts": {
-    "build": "browserify lib/index.js -s unitimer -o dist/unitimer.js",
-    "build:min": "browserify lib/index.js -s unitimer | uglifyjs -c > dist/unitimer.min.js",
-    "watch": "watchify lib/index.js -s unitimer -o dist/unitimer.js",
-    "lint": "standard",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "lint": "eslint . --ext .js",
+    "fix": "eslint . --ext .js --fix",
     "unit": "ava -v",
-    "test": "standard && ava -v"
+    "test": "yarn lint && ava -v"
   },
   "ava": {
     "files": [
@@ -47,10 +47,21 @@
   "homepage": "https://github.com/WebSeed/unitimer#readme",
   "devDependencies": {
     "ava": "^0.19.1",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.24.1",
     "browserify": "^14.3.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.2.0",
     "proxyquire": "^1.7.10",
     "sinon": "^2.3.1",
-    "standard": "^10.0.2",
-    "watchify": "^3.7.0"
+    "watchify": "^3.7.0",
+    "webpack": "^3.0.0"
   }
 }
