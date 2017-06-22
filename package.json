@@ -7,8 +7,8 @@
     "./lib/now.js": "./lib/browser-now.js"
   },
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch",
+    "build": "babel src/ -d lib/",
+    "watch": "babel -w src/ -d lib/",
     "lint": "eslint . --ext .js",
     "fix": "eslint . --ext .js --fix",
     "unit": "ava -v",
@@ -51,6 +51,7 @@
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-latest": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
@@ -61,7 +62,6 @@
     "eslint-plugin-import": "^2.2.0",
     "proxyquire": "^1.7.10",
     "sinon": "^2.3.1",
-    "watchify": "^3.7.0",
-    "webpack": "^3.0.0"
+    "watchify": "^3.7.0"
   }
 }

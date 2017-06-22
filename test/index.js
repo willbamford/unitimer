@@ -1,6 +1,6 @@
 const test = require('ava')
 const sinon = require('sinon')
-const createTimer = require('../lib')
+const createTimer = require('../src')
 
 function stubHrtime(times) {
   let index = 0
