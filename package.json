@@ -1,11 +1,8 @@
 {
   "name": "unitimer",
-  "version": "3.8.0",
+  "version": "3.8.3",
   "description": "Universal timer (Node.js and browser)",
   "main": "./lib/index.js",
-  "browser": {
-    "./lib/now.js": "./lib/browser-now.js"
-  },
   "scripts": {
     "build": "babel src/ -d lib/",
     "watch": "babel -w src/ -d lib/",

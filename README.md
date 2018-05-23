@@ -6,7 +6,7 @@
     alt="NPM version" />
 </a>
 
-Timer for Node.js and browser:
+Universal timer for Node.js and browser:
 
 ```js
 import createTimer from 'unitimer'
@@ -18,7 +18,7 @@ setTimeout(() => {
 }, 1000)
 ```
 
-Multiple:
+Multiple timers:
 
 ```js
 import createTimer from 'unitimer'
