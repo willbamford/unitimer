@@ -16,7 +16,7 @@
     alt="File size" />
 </a>
 
-Universal timer (Node.js and browser). Super simple i.e.
+Universal timer for Node.js and browser:
 
 ```js
 var createTimer = require('unitimer')
@@ -24,6 +24,22 @@ var timer = createTimer().start()
 setTimeout(function () {
   var ms = timer.stop() // ms ~= 1000.0
 }, 1000)
+```
+
+Multiple:
+
+```js
+const [a, b] = createTimer(['a', 'b'])
+a.start()
+b.start()
+
+// ...
+
+a.stop()
+b.stop()
+
+a.log()
+b.log()
 ```
 
 ## API
