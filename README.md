@@ -19,27 +19,25 @@
 Universal timer for Node.js and browser:
 
 ```js
-var createTimer = require('unitimer')
-var timer = createTimer().start()
+import createTimer from 'unitimer'
+
+const timer = createTimer().start()
 setTimeout(function () {
-  var ms = timer.stop() // ms ~= 1000.0
+  const ms = timer.stop() // ms ~= 1000.0
+  timer.log() // output to console
 }, 1000)
 ```
 
 Multiple:
 
 ```js
+import createTimer from 'unitimer'
+
 const [a, b] = createTimer(['a', 'b'])
 a.start()
 b.start()
 
 // ...
-
-a.stop()
-b.stop()
-
-a.log()
-b.log()
 ```
 
 ## API
