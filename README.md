@@ -12,7 +12,7 @@ Timer for Node.js and browser:
 import createTimer from 'unitimer'
 
 const timer = createTimer().start()
-setTimeout(function () {
+setTimeout(() => {
   const ms = timer.stop() // ms ~= 1000.0
   timer.log() // output to console
 }, 1000)
