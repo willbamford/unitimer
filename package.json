@@ -1,6 +1,6 @@
 {
   "name": "unitimer",
-  "version": "3.7.1",
+  "version": "3.8.0",
   "description": "Universal timer (Node.js and browser)",
   "main": "./lib/index.js",
   "browser": {
@@ -9,8 +9,8 @@
   "scripts": {
     "build": "babel src/ -d lib/",
     "watch": "babel -w src/ -d lib/",
-    "lint": "eslint . --ext .js",
-    "fix": "eslint . --ext .js --fix",
+    "lint": "eslint ./src --ext .js",
+    "fix": "eslint ./src --ext .js --fix",
     "unit": "ava -v",
     "test": "yarn lint && ava -v"
   },
