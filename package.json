@@ -2,10 +2,13 @@
   "name": "unitimer",
   "version": "3.8.3",
   "description": "Universal timer (Node.js and browser)",
-  "main": "./lib/index.js",
+  "source": "src/index.js",
+  "main": "lib/unitimer.js",
+  "umd:main": "lib/unitimer.umd.js",
+  "module": "lib/unitimer.m.js",
   "scripts": {
-    "build": "babel src/ -d lib/",
-    "watch": "babel -w src/ -d lib/",
+    "build": "microbundle",
+    "dev": "microbundle watch",
     "lint": "eslint ./src --ext .js",
     "fix": "eslint ./src --ext .js --fix",
     "unit": "ava -v",
@@ -57,7 +60,10 @@
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.2.0",
+    "microbundle": "^0.4.4",
     "proxyquire": "^1.7.10",
+    "rollup": "^0.59.2",
+    "rollup-plugin-babel": "^3.0.4",
     "sinon": "^2.3.1",
     "watchify": "^3.7.0"
   }

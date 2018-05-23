@@ -1,5 +1,5 @@
-const nowNode = require('./now-node')
-const nowBrowser = require('./now-browser')
+import nowNode from './now-node'
+import nowBrowser from './now-browser'
 
 let now
 if (typeof window === 'undefined') {
@@ -8,4 +8,4 @@ if (typeof window === 'undefined') {
   now = nowBrowser
 }
 
-module.exports = now
+export default () => now()

@@ -1,13 +1,13 @@
-const now = require('./now')
+import now from './now'
 
-function toFixed(v, dp) {
+const toFixed = (v, dp) => {
   if (typeof dp === 'undefined') {
     return v
   }
   return v.toFixed(dp)
 }
 
-function createInstance(tag) {
+const createInstance = (tag) => {
   let totalTime
   let meanTime
   let minTime
@@ -16,7 +16,7 @@ function createInstance(tag) {
   let tookTime
   let startTimes
 
-  function reset() {
+  const reset = () => {
     totalTime = 0
     meanTime = 0
     minTime = -1
@@ -91,15 +91,11 @@ function createInstance(tag) {
   }
 }
 
-function isArray(o) {
-  return Object.prototype.toString.call(o) === '[object Array]'
-}
+const isArray = o => Object.prototype.toString.call(o) === '[object Array]'
 
-function isString(o) {
-  return (typeof o === 'string') || (o instanceof String)
-}
+const isString = o => (typeof o === 'string') || (o instanceof String)
 
-function createTimer(tags) {
+const createTimer = (tags) => {
   if (isArray(tags)) {
     const a = []
     for (let i = 0; i < tags.length; i += 1) {
@@ -113,4 +109,4 @@ function createTimer(tags) {
   return createInstance()
 }
 
-module.exports = createTimer
+export default createTimer
