@@ -1,6 +1,6 @@
 {
   "name": "unitimer",
-  "version": "3.8.3",
+  "version": "3.9.0",
   "description": "Universal timer (Node.js and browser)",
   "source": "src/index.js",
   "main": "lib/unitimer.js",
