@@ -1,6 +1,6 @@
 {
   "name": "unitimer",
-  "version": "3.10.0",
+  "version": "3.11.0",
   "description": "Universal timer (Node.js and browser)",
   "source": "src/index.js",
   "main": "lib/unitimer.js",
@@ -18,7 +18,7 @@
     "files": [
       "test/**/*.js"
     ],
-    "source": [
+    "sources": [
       "lib/**/*.js"
     ]
   },
@@ -46,13 +46,13 @@
   },
   "homepage": "https://github.com/WebSeed/unitimer#readme",
   "devDependencies": {
-    "ava": "^0.19.1",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb-base": "^11.2.0",
+    "ava": "^1.4.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.2.0",
-    "microbundle": "^0.4.4",
-    "proxyquire": "^1.7.10",
-    "sinon": "^2.3.1",
+    "microbundle": "^0.11.0",
+    "proxyquire": "^2.1.0",
+    "sinon": "^7.3.2",
     "watchify": "^3.7.0"
   }
 }

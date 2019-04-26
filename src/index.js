@@ -77,12 +77,12 @@ const createInstance = (tag) => {
     },
     info(dp) {
       return `${tag ? `[${tag}] ` : ''}mean: ${toFixed(meanTime, dp)
-        }ms, took: ${toFixed(tookTime, dp)
-        }ms, total: ${toFixed(totalTime, dp)
-        }ms, count: ${count
-        }, min: ${toFixed(minTime, dp)
-        }ms, max: ${toFixed(maxTime, dp)
-        }ms`
+      }ms, took: ${toFixed(tookTime, dp)
+      }ms, total: ${toFixed(totalTime, dp)
+      }ms, count: ${count
+      }, min: ${toFixed(minTime, dp)
+      }ms, max: ${toFixed(maxTime, dp)
+      }ms`
     },
     log(dp) {
       // eslint-disable-next-line no-console
