@@ -91,9 +91,9 @@ const createInstance = (tag) => {
   }
 }
 
-const isArray = o => Object.prototype.toString.call(o) === '[object Array]'
+const isArray = (o) => Object.prototype.toString.call(o) === '[object Array]'
 
-const isString = o => (typeof o === 'string') || (o instanceof String)
+const isString = (o) => (typeof o === 'string') || (o instanceof String)
 
 const createTimer = (tags) => {
   if (isArray(tags)) {
