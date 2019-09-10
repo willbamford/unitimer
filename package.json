@@ -6,6 +6,7 @@
   "main": "lib/unitimer.js",
   "umd:main": "lib/unitimer.umd.js",
   "module": "lib/unitimer.m.js",
+  "types": "types.d.ts",
   "scripts": {
     "build": "microbundle",
     "dev": "microbundle watch",
