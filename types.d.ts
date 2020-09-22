@@ -11,13 +11,14 @@ export type Timer = {
   start(id?: string): Timer
   stop(id?: string): number
   reset(): void
+  total(): number
   took(): number
   mean(): number
   count(): number
   min(): number
   max(): number
   stats(): Stats
-  info(): string
+  info(precision?: number): string
   log(): void
 }
 
